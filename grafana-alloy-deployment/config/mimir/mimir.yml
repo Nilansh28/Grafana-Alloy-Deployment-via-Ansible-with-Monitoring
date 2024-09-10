@@ -1,0 +1,52 @@
+# Mimir configuration file
+
+server:
+  # The address to bind the server
+  address: '0.0.0.0'
+  # The port to listen on
+  port: 9090
+
+# Configure the storage backend
+storage:
+  # Type of storage backend (e.g., "filesystem", "cassandra", "prometheus", etc.)
+  type: 'filesystem'
+  # Directory to store data if using filesystem
+  path: '/var/lib/mimir'
+
+# Configure the metrics collection
+scrape_configs:
+  - job_name: 'grafana_alloy'
+    static_configs:
+      - targets: ['localhost:8080']
+    # Set additional scrape options if needed
+
+# Configure logging
+logging:
+  level: 'info'
+  # Optionally, set a file path for logs
+  # file: '/var/log/mimir/mimir.log'
+
+# Configure any alerting rules if applicable
+alerting:
+  rules:
+    - name: 'example_alert'
+      expr: 'up == 0'
+      for: '5m'
+      labels:
+        severity: 'critical'
+      annotations:
+        summary: 'Instance down'
+        description: 'The instance {{ $labels.instance }} is down.'
+
+# Configure any additional settings such as remote storage or network settings
+remote_write:
+  - url: 'http://remote-storage-endpoint:9090/api/v1/write'
+    # Optionally configure other settings like timeout, batch size, etc.
+
+# Optionally, configure external integrations
+integrations:
+  # Example: integrate with external monitoring services
+  - name: 'example_integration'
+    type: 'http'
+    url: 'http://example.com/metrics'
+    # Other integration settings

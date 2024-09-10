@@ -1,0 +1,7 @@
+server:
+  http_listen_port: 9009
+
+scrape_configs:
+  - job_name: 'cosmos-chain'
+    static_configs:
+      - targets: ['localhost:26660']

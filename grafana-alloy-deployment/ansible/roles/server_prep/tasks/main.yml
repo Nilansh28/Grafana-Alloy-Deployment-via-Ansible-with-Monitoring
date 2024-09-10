@@ -1,0 +1,12 @@
+---
+- name: Update the package list (for Ubuntu/Debian)
+  ansible.builtin.apt:
+    update_cache: yes
+
+- name: Install common dependencies (for Ubuntu/Debian)
+  ansible.builtin.apt:
+    name:
+      - curl
+      - wget
+      - git
+    state: present

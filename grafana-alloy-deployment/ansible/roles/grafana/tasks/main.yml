@@ -1,0 +1,17 @@
+---
+- name: Install Grafana
+  apt:
+    name: grafana
+    state: present
+    update_cache: yes
+
+- name: Configure Grafana
+  template:
+    src: grafana.ini.j2
+    dest: /etc/grafana/grafana.ini
+
+- name: Start Grafana Service
+  systemd:
+    name: grafana-server
+    state: started
+    enabled: yes

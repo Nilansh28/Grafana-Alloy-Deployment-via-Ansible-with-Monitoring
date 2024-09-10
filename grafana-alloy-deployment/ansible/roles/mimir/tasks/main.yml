@@ -1,0 +1,17 @@
+---
+- name: Install Mimir
+  apt:
+    name: mimir
+    state: present
+    update_cache: yes
+
+- name: Configure Mimir
+  template:
+    src: mimir.yml.j2
+    dest: /etc/mimir/mimir.yml
+
+- name: Start Mimir Service
+  systemd:
+    name: mimir
+    state: started
+    enabled: yes

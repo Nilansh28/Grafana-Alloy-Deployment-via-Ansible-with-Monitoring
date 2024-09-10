@@ -1,0 +1,22 @@
+---
+- name: Download and Install Grafana Alloy
+  get_url:
+    url: https://example.com/path/to/grafana_alloy.tar.gz
+    dest: /tmp/grafana_alloy.tar.gz
+
+- name: Extract Grafana Alloy
+  unarchive:
+    src: /tmp/grafana_alloy.tar.gz
+    dest: /opt/
+    remote_src: yes
+
+- name: Configure Grafana Alloy
+  template:
+    src: grafana_alloy.yml.j2
+    dest: /etc/grafana_alloy/config.yml
+
+- name: Start Grafana Alloy Service
+  systemd:
+    name: grafana_alloy
+    state: started
+    enabled: yes

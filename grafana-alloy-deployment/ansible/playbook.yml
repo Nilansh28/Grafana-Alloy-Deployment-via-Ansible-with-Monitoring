@@ -1,0 +1,8 @@
+--
+- name: Deploy Grafana Alloy and Monitoring Stack
+  hosts: cosmos_chain
+  become: yes
+  roles:
+    - grafana_alloy
+    - grafana
+    - mimir

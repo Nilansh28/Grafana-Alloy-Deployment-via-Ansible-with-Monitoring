@@ -1,0 +1,10 @@
+---
+- name: Configure Grafana alerting for Telegram
+  copy:
+    src: files/telegram_alerting.yml
+    dest: /etc/grafana/alerting/telegram_alerting.yml
+
+- name: Restart Grafana to apply alerting configuration
+  service:
+    name: grafana-server
+    state: restarted
